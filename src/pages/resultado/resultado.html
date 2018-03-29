@@ -1,0 +1,102 @@
+<ion-header>
+  <ion-navbar no-border-bottom color="primary">
+    <ion-title text-center>
+      IBA <small>{{zona}}</small>
+    </ion-title>
+  </ion-navbar>
+
+  <ion-toolbar no-border-top color="primary">
+    <ion-segment [(ngModel)]="segmento" color="light">
+      <ion-segment-button value="seg1">Evaluación</ion-segment-button>
+      <ion-segment-button value="seg2">Historial</ion-segment-button>
+      <ion-segment-button value="seg3">Configuración</ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div [ngSwitch]="segmento">
+    <ion-list *ngSwitchCase="'seg1'">
+      <ion-list-header>
+        <button ion-button icon-left (click)="addFamilia()"><ion-icon name="add-circle"></ion-icon>Familia</button>
+      </ion-list-header>
+      <ion-item-sliding *ngFor="let t of FAM_SELEC; let index = index">
+        <ion-item>
+          <h2>{{t.FAM}}</h2>
+          <ion-note color="primary" item-end>{{t.IBA}}</ion-note>
+        </ion-item>
+        <ion-item-options>
+          <button ion-button (click)="borrarFamilia(index)" color="danger" icon-start>
+            <ion-icon name="trash"></ion-icon>Borrar
+          </button>
+        </ion-item-options>
+      </ion-item-sliding>
+      <ion-item *ngIf="FAM_SELEC.length>0">
+        <button ion-button (click)="guardarHistorial()"><ion-icon name="save"></ion-icon>Finalizar Evaluación</button>
+        <ion-badge [color]="color" item-end>Total: {{total_abi}}</ion-badge>
+      </ion-item>
+      <ion-item *ngIf="FAM_SELEC.length>0">
+        <ion-grid>
+          <ion-row text-center>
+            <ion-col style="background: #ff2e23">
+              <ion-icon name="thumbs-down"></ion-icon><br><11
+            </ion-col>
+            <ion-col style="background: #ffa23d">
+              <ion-icon name="ios-thumbs-down-outline"></ion-icon><br>11-26
+            </ion-col>
+            <ion-col style="background: #fffd62">
+              <ion-icon name="ios-warning-outline"></ion-icon><br>27-44
+            </ion-col>
+            <ion-col style="background: #34ff61">
+              <ion-icon name="ios-thumbs-up-outline"></ion-icon><br>45-70
+            </ion-col>
+            <ion-col style="background: #8defff">
+              <ion-icon name="thumbs-up"></ion-icon><br>>70
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+    </ion-list>
+
+    <ion-list *ngSwitchCase="'seg2'">
+      <ion-list-header>
+        <button ion-button icon-left (click)="sincroniza()" *ngIf="user!=null"><ion-icon name="cloud-upload"></ion-icon>Subir Datos</button>
+      </ion-list-header>
+      <ion-item-sliding *ngFor="let t of HISTORIAL.reverse(); let index = index">
+        <ion-item *ngIf="t.usu==user">
+        <h3>{{t.lug}} {{t.gru}}</h3>
+           <small>{{t.zon}}: {{t.fec | date: 'dd/MM/yyyy H:mm:ss'}} <ion-note color="primary" *ngIf="t.sta==1 && user!=null">Pendiente..</ion-note></small>
+          <ion-badge item-end [color]="t.col">{{t.pun}}</ion-badge>
+        </ion-item>
+        <ion-item-options *ngIf="t.usu==user">
+          <button ion-button (click)="borrarHistorial(index)" color="danger" icon-start>
+            <ion-icon name="trash"></ion-icon>Borrar
+          </button>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-list>
+
+    <ion-list *ngSwitchCase="'seg3'">
+      <ion-item>
+        <ion-icon name='locate' item-start></ion-icon>
+        <button [disabled]="zona=='COSTA'" (click)="setZona('COSTA')" ion-button small>COSTA</button>
+        <button [disabled]="zona=='SIERRA'" (click)="setZona('SIERRA')" ion-button small>SIERRA</button>
+        <button [disabled]="zona=='SELVA'" (click)="setZona('SELVA')" ion-button small>SELVA</button>
+      </ion-item>
+      <button ion-item (click)="acceso()">
+        <ion-icon name='contact' item-start></ion-icon>
+        Usuario
+        <ion-note item-end>
+          <b>{{user}}</b>
+          <ion-icon name="logo-snapchat" *ngIf="user==null"></ion-icon>
+        </ion-note>
+      </button>
+      <button ion-item (click)="fotos()">
+        <ion-icon name='images' item-start></ion-icon>
+        Actualizar fotos
+      </button>
+    </ion-list>
+  </div>
+
+
+</ion-content>

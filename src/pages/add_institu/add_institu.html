@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-title>
+      {{label}} Institucion
+    </ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="Cierra()"><ion-icon name="close"></ion-icon></button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content padding>
+
+  <form novalidate #f="ngForm" (ngSubmit)="Guarda()">
+    <ion-list>
+      <ion-item>
+        <ion-label floating>USUARIO</ion-label>
+        <ion-input type="text" [(ngModel)]="user" name="user" [disabled]="label == 'Editar'" required></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>COTRASEÑA</ion-label>
+        <ion-input type="text" [(ngModel)]="pass" name="pass" required></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>NOMBRE</ion-label>
+        <ion-input type="text" [(ngModel)]="nom" name="nom" required></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>E-MAil</ion-label>
+        <ion-input type="mail" [(ngModel)]="mai" name="mai" required></ion-input>
+      </ion-item>
+    </ion-list>
+
+    <button full ion-button color="secondary" type="submit" [disabled]="!f.valid">Guardar</button>
+  </form>
+
+</ion-content>

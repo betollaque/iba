@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>
+      Agregar Familia <small>({{zona}})</small>
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+  <ion-list>
+    <ion-item *ngFor="let t of FAMILIA; let i = index" vertical-align-top>
+      <ion-thumbnail item-start (click)="verFoto2(i+'_orden.jpg',t.orden)">
+        <img src='assets/imgs/{{i}}_orden.jpg'>
+      </ion-thumbnail>
+      <ion-icon class="icono" color="primary" item-right (click)="toggleSection(i)" name="arrow-dropright" *ngIf="!t.open"></ion-icon>
+      <ion-icon class="icono" color="primary" item-right (click)="toggleSection(i)" name="arrow-dropdown" *ngIf="t.open"></ion-icon>
+      <b (click)="toggleSection(i)">{{t.orden}}</b>
+      <div *ngIf="t.open">
+        <ion-item no-lines *ngFor="let f of t.fams">
+          <button ion-button clear (click)="verFoto(f.id,t.orden+' - '+f.familia)">{{f.familia}}</button>
+
+          <button ion-button round item-end *ngIf="zona=='COSTA' || zona=='SELVA'" (click)="addFamilia(f.id,t.orden,f.familia,f.costaselva)">
+            {{f.costaselva}}</button>
+          <button ion-button round item-end *ngIf="zona=='SIERRA'" (click)="addFamilia(f.id,t.orden,f.familia,f.sierra)">
+            {{f.sierra}}</button>
+        </ion-item>
+      </div>
+    </ion-item>
+  </ion-list>
+
+</ion-content>

@@ -1,0 +1,69 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-title>
+      <small>{{getMUESTRA}}:</small> {{getORDEN}} <span style="color:gray"> > </span> {{getFAMILIA}}
+    </ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="Cierra()"><ion-icon name="close"></ion-icon></button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content padding>
+  <form novalidate #f="ngForm" (ngSubmit)="Guarda()">
+    <ion-grid>
+      <ion-row align-items-center>
+        <ion-col col-3>
+          <ion-img src="http://ecbiz222.inmotionhosting.com/~vigose5/abi/img/{{getMUESTRA}}_1.jpg?{{fecha | date:'medium'}}" width="100" height="100"></ion-img>
+        </ion-col>
+        <ion-col>
+          <input type="file" name="foto1" required (change)="handleFileSelect1($event)" accept="image/jpeg" />
+        </ion-col>
+      </ion-row>
+      <ion-row align-items-center>
+        <ion-col col-3>
+          <ion-img src="http://ecbiz222.inmotionhosting.com/~vigose5/abi/img/{{getMUESTRA}}_2.jpg?{{fecha | date:'medium'}}" width="100" height="100"></ion-img>
+        </ion-col>
+        <ion-col>
+          <input type="file" name="foto2" required (change)="handleFileSelect2($event)" accept="image/jpeg" />
+        </ion-col>
+      </ion-row>
+      <ion-row align-items-center>
+        <ion-col col-3>
+          <ion-img src="http://ecbiz222.inmotionhosting.com/~vigose5/abi/img/{{getMUESTRA}}_3.jpg?{{fecha | date:'medium'}}" width="100" height="100"></ion-img>
+        </ion-col>
+        <ion-col>
+          <input type="file" name="foto3" required (change)="handleFileSelect3($event)" accept="image/jpeg" />
+        </ion-col>
+      </ion-row>
+      <ion-row align-items-center>
+        <ion-col col-3>
+          <ion-img src="http://ecbiz222.inmotionhosting.com/~vigose5/abi/img/{{getMUESTRA}}_4.jpg?{{fecha | date:'medium'}}" width="100" height="100"></ion-img>
+        </ion-col>
+        <ion-col>
+          <input type="file" name="foto4" required (change)="handleFileSelect4($event)" accept="image/jpeg" />
+        </ion-col>
+      </ion-row>
+      <ion-row align-items-center>
+        <ion-col col-3>
+          <ion-img src="http://ecbiz222.inmotionhosting.com/~vigose5/abi/img/{{getMUESTRA}}_5.jpg?{{fecha | date:'medium'}}" width="100" height="100"></ion-img>
+        </ion-col>
+        <ion-col>
+          <input type="file" name="foto5" required (change)="handleFileSelect5($event)" accept="image/jpeg" />
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-3>
+          <ion-img src="http://ecbiz222.inmotionhosting.com/~vigose5/abi/img/{{getMUESTRA}}_6.jpg?{{fecha | date:'medium'}}" width="100" height="100"></ion-img>
+        </ion-col>
+        <ion-col>
+          <input type="file" name="foto6" required (change)="handleFileSelect6($event)" accept="image/jpeg" />
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <button full ion-button color="secondary" type="submit" [disabled]="!f.valid">Guardar</button>
+  </form>
+
+</ion-content>
